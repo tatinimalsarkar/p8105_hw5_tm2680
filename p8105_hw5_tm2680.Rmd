@@ -12,13 +12,22 @@ library(rvest)
 library(stringr)
 ```
 
-```{r long_data_import}
+```{r long_data_manip}
 long_data = str_c("./data/", list.files(path = "./data"))
 
 read_long = function(x) {
-  z = read_csv(x)
+  read_csv(x)
 }
 
-output = map_dfr(long_data, read_long, .id = "input")
+output = map_dfr(long_data, read_long, .id = "input") %>% 
+  janitor::clean_names()
+```
+
+Here is a dataframe that presents 
+ADD CONTROL OR EXPERIMENTAL
+MAKE SPAG PLOT
+
+```{r}
+
 ```
 
