@@ -10,24 +10,24 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(rvest)
 library(stringr)
+library(purrr)
+library(magrittr)
 ```
 
-```{r long_data_manip}
-long_data = str_c("./data/", list.files(path = "./data"))
-
+```{r long_data_load_tidy}
+long_data = str_c("./data/", list.files(path = "./data")) 
 read_long = function(x) {
   read_csv(x)
 }
 
-output = map_dfr(long_data, read_long, .id = "input") %>% 
+output = map_dfr(long_data, read_long) %>% 
+  mutate(cont_arm = str_sub(long_data, 8, 10)) %>% 
+  mutate(cont_no = str_sub(long_data, 12, 13)) %>% 
+  select(cont_arm, cont_no, everything()) %>% 
   janitor::clean_names()
 ```
 
 Here is a dataframe that presents 
 ADD CONTROL OR EXPERIMENTAL
 MAKE SPAG PLOT
-
-```{r}
-
-```
 
