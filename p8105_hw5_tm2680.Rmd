@@ -9,9 +9,16 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(rvest)
+library(stringr)
 ```
 
 ```{r long_data_import}
-long_data = list.files(path = "./data")
+long_data = str_c("./data/", list.files(path = "./data"))
+
+read_long = function(x) {
+  z = read_csv(x)
+}
+
+output = map_dfr(long_data, read_long, .id = "input")
 ```
 
