@@ -21,7 +21,9 @@ read_long = function(x) {
 }
 
 output = map_dfr(long_data, read_long) %>% 
-  mutate(cont_arm = str_sub(long_data, 8, 10)) %>% 
+  mutate(cont_arm = str_sub(long_data, 8, 10),
+         cont_arm = replace(cont_arm, cont_arm == "con", "control"),
+         cont_arm = replace(cont_arm, cont_arm == "exp", "experimental")) %>% 
   mutate(cont_no = str_sub(long_data, 12, 13)) %>% 
   select(cont_arm, cont_no, everything()) %>% 
   janitor::clean_names()
