@@ -35,18 +35,18 @@ output = map_dfr(long_data, read_long, .id = "input") %>%
   mutate(week = as.numeric(week))
 
 output %>% 
-  group_by(arm) %>% 
-  ggplot(aes(x = week, y = value, color = id)) +
+  ggplot(aes(x = week, y = value, color = number)) +
   geom_line() +
   labs(
     title = "Spaghetti plot of observations over time",
     x = "Week",
     y = "Value"
   ) +
-  scale_color_hue(name = "Subject")
+  scale_color_hue(name = "Subject") +
+  facet_grid(~ arm)
 ```
 
-Here is a dataframe that presents 
+Here is a faceted spaghetti plot showing observations for each subject over a period of 8 weeks. On average, it looks like the values for the experimental group increased over time, whereas the values stayed roughly the same for the control group.
 
 
 
