@@ -65,12 +65,22 @@ hom_dat = read_csv(hom_url) %>%
 
 hom_dat %>% 
   group_by(city_state) %>% 
-  summarize(n_hom = n(),
-            n_hom_unsolv = sum(disposition == "Closed without arrest" | disposition == "Open/No arrest")) %>% 
+  summarize(hom = n(),
+            hom_unsolv = sum(disposition == "Closed without arrest" | disposition == "Open/No arrest")) %>% 
   knitr::kable(digits = 0)
 ```
 
 The raw data comprises observations on homicides in numerous cities, including date, victim name, race, and gender, location, and disposition. There are 52,179 observations. The above table shows the total number of homicides and number of unsolved homicides by city.
 
+```{r hom_dat_balt}
+hom_dat_balt = hom_dat %>% 
+  group_by(city_state) %>% 
+  summarize(hom_balt = n(),
+            hom_unsolv_balt = sum(disposition == "Closed without arrest" | disposition == "Open/No arrest")) %>% 
+  filter(city_state == "Baltimore, MD") 
 
+hom_balt_prop = prop.test(hom_dat_balt$hom_unsolv_balt, hom_dat_balt$hom_balt, p = NULL) %>% 
+  broom::tidy() %>% 
+  select(estimate, conf.low, conf.high)
+```
 
