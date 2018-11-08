@@ -13,12 +13,15 @@ library(stringr)
 library(purrr)
 library(magrittr)
 library(ggridges)
+library(httr)
 ```
 
 
 # Problem 1
 ```{r long_data_load_tidy}
-long_data = str_c("./data/", list.files(path = "./data")) 
+long_data = str_c("./data/", list.files(path = "./data"))
+long_data_df = tibble(long_data)
+
 read_long = function(x) {
   read_csv(x)
 }
@@ -52,3 +55,8 @@ Here is a faceted spaghetti plot showing observations for each subject over a pe
 
 
 # Problem 2
+
+```{r hom_load_tidy}
+hom_url = "https://raw.githubusercontent.com/washingtonpost/data-homicides/master/homicide-data.csv"
+```
+
