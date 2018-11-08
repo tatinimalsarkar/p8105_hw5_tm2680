@@ -15,6 +15,8 @@ library(magrittr)
 library(ggridges)
 ```
 
+
+# Problem 1
 ```{r long_data_load_tidy}
 long_data = str_c("./data/", list.files(path = "./data")) 
 read_long = function(x) {
@@ -49,4 +51,4 @@ output %>%
 Here is a faceted spaghetti plot showing observations for each subject over a period of 8 weeks. On average, it looks like the values for the experimental group increased over time, whereas the values stayed roughly the same for the control group.
 
 
-
+# Problem 2
